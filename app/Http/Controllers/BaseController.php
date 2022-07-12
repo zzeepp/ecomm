@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Traits\FlashMessages;
-use Illuminate\Http\Request;
+use function redirect;
+use function response;
+use function view;
 
 class BaseController extends Controller {
 	use FlashMessages;

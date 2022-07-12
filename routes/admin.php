@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminAuhController;
-use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\AttributeValueController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\AttributeValueController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix( 'admin' )
@@ -14,7 +14,7 @@ Route::prefix( 'admin' )
 	
 		 Route::get( '/login',
 					 [
-						 AdminAuhController::class,
+						 LoginController::class,
 						 'create'
 					 ] )
 			  ->name( 'login' );
@@ -22,7 +22,7 @@ Route::prefix( 'admin' )
 	
 		 Route::post( '/login',
 					  [
-						  AdminAuhController::class,
+						  LoginController::class,
 						  'store'
 					  ] )
 			  ->name( 'login.store' );
@@ -30,7 +30,7 @@ Route::prefix( 'admin' )
 	
 		 Route::get( '/logout',
 					 [
-						 AdminAuhController::class,
+						 LoginController::class,
 						 'destroy'
 					 ] )
 			  ->name( 'logout' );

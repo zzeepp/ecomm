@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class SettingServiceProvider extends ServiceProvider {
+	protected $defer = false;
 	/**
 	 * Register services.
 	 *
@@ -20,7 +21,7 @@ class SettingServiceProvider extends ServiceProvider {
 				return new Settings();
 			} );
 		$loader = AliasLoader::getInstance();
-		$loader->alias( 'Setting',
+		$loader->alias( 'Settings',
 						Settings::class );
 	}
 	

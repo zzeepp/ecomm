@@ -17,7 +17,7 @@ return new class extends Migration {
 				$table->foreignId( 'attribute_id' )
 					  ->constrained( 'attributes' )
 					  ->onDelete( 'cascade' );
-				$table->string( 'value' );
+				$table->string( 'attribute_value' );
 				$table->integer( 'quantity' );
 				$table->decimal( 'price' )
 					  ->nullable();

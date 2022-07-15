@@ -22,7 +22,7 @@ class Attribute extends Model
 		 'is_required' => 'boolean',
 	];
 	
-	public function values() {
+	public function attributevalues() {
 		return $this->hasMany(AttributeValue::class);
 	}
 }

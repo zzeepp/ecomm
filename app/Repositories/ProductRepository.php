@@ -13,7 +13,7 @@ use Illuminate\Database\QueryException;
 class ProductRepository extends BaseRepository implements ProductContract {
 	use UploadAble;
 	
-	public function __construct( Model $model ) {
+	public function __construct( Product $model ) {
 		parent::__construct( $model );
 		$this->model = $model;
 	}
@@ -26,7 +26,7 @@ class ProductRepository extends BaseRepository implements ProductContract {
 	
 	public function findProductById( int $id ) {
 		try {
-			return $this->findOneOrFail();
+			return $this->findOneOrFail($id);
 		}catch( ModelNotFoundException $exception ) {
 			throw new ModelNotFoundException( $exception );
 		}

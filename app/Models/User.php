@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'address',
+        'city',
+        'country',
     ];
 
     /**
@@ -41,4 +45,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+	
+	public function getFullNameAttribute()
+	{
+		return $this->first_name. ' '. $this->last_name;
+	}
+	
+	public function orders() {
+		return $this->hasMany(Order::class,'user_id');
+	}
 }

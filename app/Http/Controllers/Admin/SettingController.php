@@ -16,13 +16,14 @@ class SettingController extends BaseController {
 	public function index() {
 		$this->setPageTitle( 'Settings',
 							 'Manage Settings' );
-		$settingsLogo=Settings::get('site_logo');
-		return view( 'admin.settings.index' ,compact('settingsLogo'));
+		$settingsLogo = Settings::get( 'site_logo' );
+		return view( 'admin.settings.index',
+					 compact( 'settingsLogo' ) );
 	}
 	
 	public function update( Request $request ) {
 		if( $request->has( 'site_logo' ) && ( $request->file( 'site_logo' ) instanceof UploadedFile ) ) {
-			$sileLogo=Settings::get('site_logo' );
+			$sileLogo = Settings::get( 'site_logo' );
 			if( $sileLogo != null ) {
 				$this->deleteOne( $sileLogo );
 			}

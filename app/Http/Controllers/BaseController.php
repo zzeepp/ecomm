@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Traits\FlashMessages;
-use function redirect;
-use function response;
-use function view;
+
 
 class BaseController extends Controller {
 	use FlashMessages;
-	
-	protected $data = null;
 	
 	protected function setPageTitle( $title,
 									 $subTitle ) {

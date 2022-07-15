@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use TypiCMS\NestableTrait;
 
 class Category extends Model {
 	use HasFactory;
+	use NestableTrait;
 	
 	protected $fillable = [
 		'name',
@@ -30,12 +32,22 @@ class Category extends Model {
 		$this->attributes[ 'slug' ] = Str::slug( $value );
 	}
 	
+	public function children() {
+		return $this->hasMany( Category::class,
+							   'parent_id' );
+	}
+	
 	public function parent() {
 		return $this->belongsTo( Category::class,
 								 'parent_id' );
 	}
 	
-	public function children() {
-		return $this->hasMany(Category::class,'parent_id');
+	public function products() {
+
+		return $this->belongsToMany( Product::class,
+									 'product_categories',
+									 'category_id',
+									 'product_id' );
 	}
+	
 }

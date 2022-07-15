@@ -58,7 +58,7 @@ return [
 	*/
 	
 	'url' => env( 'APP_URL',
-				  'http://localhost' ),
+				  'http://ecomgit.test' ),
 	
 	'asset_url' => env( 'ASSET_URL',
 						null ),
@@ -172,7 +172,8 @@ return [
 		/*			***			***			***			*/
 		\App\Providers\SettingServiceProvider::class,
 		\App\Providers\RepositoryServiceProvider::class,
-		
+		\App\Providers\ViewComposerServiceProvider::class,
+		Darryldecode\Cart\CartServiceProvider::class,
 		/*			***			***			***			*/
 		
 		/*
@@ -187,7 +188,6 @@ return [
 		// App\Providers\BroadcastServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		Darryldecode\Cart\CartServiceProvider::class,
 	
 	],
 	

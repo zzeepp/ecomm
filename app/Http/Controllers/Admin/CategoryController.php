@@ -9,10 +9,7 @@ use function view;
 
 class CategoryController extends BaseController {
 	protected $categoryRepository;
-	
-	/**
-	 * @param $categoryRepository
-	 */
+
 	public function __construct( CategoryContract $categoryRepository ) {
 		$this->categoryRepository = $categoryRepository;
 	}
@@ -26,8 +23,7 @@ class CategoryController extends BaseController {
 	}
 	
 	public function create() {
-		$categories = $this->categoryRepository->listCategories( 'id',
-																 'asc' );
+		$categories = $this->categoryRepository->treeList();
 		$this->setPageTitle( 'Categories',
 							 'Create category' );
 		return view( 'admin.categories.create',
@@ -65,7 +61,7 @@ class CategoryController extends BaseController {
 	
 	public function edit( $id ) {
 		$targetCategory = $this->categoryRepository->findCategoryById( $id );
-		$categories     = $this->categoryRepository->listCategories();
+		$categories     = $this->categoryRepository->treeList();
 		$this->setPageTitle( 'Categories',
 							 'Edit Category : ' . $targetCategory->name );
 		return view( 'admin.categories.edit',

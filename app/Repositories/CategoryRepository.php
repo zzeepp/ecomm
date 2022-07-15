@@ -92,7 +92,7 @@ class CategoryRepository extends BaseRepository implements CategoryContract {
 	}
 	
 	public function treeList() {
-		return Category::orderBuRaw( '-name ASC' )
+		return Category::orderByRaw( '-name ASC' )
 					   ->get()
 					   ->nest()
 					   ->setIndent( '|-- ' )
@@ -100,11 +100,17 @@ class CategoryRepository extends BaseRepository implements CategoryContract {
 	}
 	
 	public function findBySlug( $slug ) {
+//		Category::with( ['products'=>function($query)use($slug){
+//			$query->where( 'slug',
+//							 $slug );
+//		} ])->where( 'menu',
+//									 1 )
+//							->dd();
 		return Category::with( 'products' )
-					   ->where( 'slug',
-								$slug )
-					   ->where( 'menu',
-								1 )
-					   ->first();
+									->where( 'slug',
+											 $slug )
+									->where( 'menu',
+											 1 )
+									->first();;
 	}
 }

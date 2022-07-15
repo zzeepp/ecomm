@@ -6,13 +6,12 @@ use App\Contracts\OrderContract;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
-use Darryldecode\Cart\Cart;
-use Illuminate\Database\Eloquent\Model;
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Str;
 
-class OrderRepositories extends BaseRepository implements OrderContract {
+class OrderRepository extends BaseRepository implements OrderContract {
 	
-	public function __construct( Model $model ) {
+	public function __construct( Order $model ) {
 		parent::__construct( $model );
 		$this->model = $model;
 	}
@@ -22,8 +21,8 @@ class OrderRepositories extends BaseRepository implements OrderContract {
 									'order_number'   => 'ORD-' . Str::upper( uniqid() ),
 									'user_id'        => auth()->user()->id,
 									'status'         => 'pending',
-									'grand_total'    => Cart::getSubTotal(),
-									'item_count'     => Cart::getTotalQuantity(),
+									'grand_total'    => CartFacade::getSubTotal(),
+									'item_count'     => CartFacade::getTotalQuantity(),
 									'payment_status' => 0,
 									'payment_method' => null,
 									'first_name'     => $params[ 'first_name' ],
@@ -36,10 +35,10 @@ class OrderRepositories extends BaseRepository implements OrderContract {
 									'notes'          => $params[ 'notes' ],
 								] );
 		if( $order ) {
-			$items = Cart::getContent();
+			$items = CartFacade::getContent();
 			foreach( $items as $item ) {
 				$product   = Product::where( 'name',
-											 $item->id )
+											 $item->name )
 									->first();
 				$orderItem = new OrderItem( [
 												'product_id' => $product->id,
@@ -63,6 +62,6 @@ class OrderRepositories extends BaseRepository implements OrderContract {
 	
 	public function findOrderByNumber( $orderNumber ) {
 		return Order::where( 'order_number',
-							 $orderNumber );
+							 $orderNumber )->first();
 	}
 }

@@ -18,14 +18,14 @@ class AttributeValueController extends Controller {
 	public function getValues( Request $request ) {
 		$attributeId = $request->input( 'id' );
 		$attribute   = $this->attributeRepository->findAttributeById( $attributeId );
-		$values      = $attribute->values;
-		return response()->json( $values );
+		$attribute_values      = $attribute->attributeValues;
+		return response()->json( $attribute_values );
 	}
 	
 	public function addValues( Request $request ) {
 		$value               = new AttributeValue();
 		$value->attribute_id = $request->input( 'id' );
-		$value->value        = $request->input( 'value' );
+		$value->attribute_value        = $request->input( 'value' );
 		$value->price        = $request->input( 'price' );
 		$value->save();
 		

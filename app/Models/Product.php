@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model {
 	use HasFactory;
@@ -46,7 +47,7 @@ class Product extends Model {
 		return $this->belongsTo(Brand::class);
 	}
 	
-	public function attributest(  ) {
+	public function attributes(  ) {
 		return $this->hasMany(ProductAttribute::class);
 	}
 	

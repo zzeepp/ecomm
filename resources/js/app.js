@@ -6,7 +6,19 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.Vue = require('vue').default;
+import {createApp} from "vue";
+
+
+import ProductAttributes from "./components/ProductAttributes.vue";
+import AttributeValues   from "./components/AttributeValues.vue";
+
+const app = createApp({
+                          components: {
+                              ProductAttributes,
+                              AttributeValues,
+                          }
+                      });
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -25,10 +37,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
+
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-}
-else {
+} else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
@@ -40,23 +52,8 @@ else {
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-import VueSwal from 'vue-swal';
-
-Vue.use(VueSwal);
+// const files = require.context('./', true, /\.vue$/i);
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('attribute-values',
-              require('./components/AttributeValues.vue').default);
-
-const app = new Vue({
-                        el: '#app',
-                    });
+app.mount('#app');
